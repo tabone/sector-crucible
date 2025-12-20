@@ -1,0 +1,15 @@
+export const STAR_VARIANTS = [
+  "RED",
+  "ORANGE",
+  "YELLOW",
+  "BLUE",
+  "YOUNG",
+  "WHITE_DWARF",
+  "CURRUPTED",
+  "NEUTRON",
+  "TWO",
+  "BLACK_HOLE",
+  "HYPERGIANT",
+  "ARTIFICIAL",
+  "UNSTABLE",
+] as const;
