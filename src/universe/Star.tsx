@@ -1,7 +1,7 @@
+import { StarDetails } from "../components";
 import type { Sector } from "../libs/Sector";
-import { SidebarItem } from "../SidebarItem";
-import { SidebarNoResults } from "../SidebarNoResults";
 import { SidebarSection } from "../SidebarSection";
+import { SidebarNoResults } from "../SidebarNoResults";
 
 type StarProps = {
   sector: Sector;
@@ -13,11 +13,7 @@ export const Star = ({ sector }: StarProps) => {
       {!sector.star ? (
         <SidebarNoResults message="No Star" />
       ) : (
-        <SidebarItem
-          image={sector.star.image}
-          title={sector.star.name}
-          description={sector.star.description}
-        ></SidebarItem>
+        <StarDetails star={sector.star} />
       )}
     </SidebarSection>
   );

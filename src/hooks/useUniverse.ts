@@ -1,8 +1,8 @@
-import { useContext } from "react";
-import { SimulationContext } from "../contexts";
+import { useAtomValue } from "jotai";
+import { simulationAtom } from "../atoms";
 
 export const useUniverse = () => {
-  const simulation = useContext(SimulationContext);
+  const simulation = useAtomValue(simulationAtom);
 
   if (!simulation?.universe) throw new Error("no simulation in context");
 

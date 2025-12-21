@@ -14,16 +14,18 @@ import shatteredPlanetImage from "../assets/planets/Shattered.webp";
 import taintedPlanetImage from "../assets/planets/Tainted.webp";
 import vitalPlanetImage from "../assets/planets/Vital.webp";
 import { match } from "ts-pattern";
+import { uuid } from "./utils";
 
 export type PlanetProps = {
   star: Star;
+  id?: string;
   name: string;
   life: string;
   feature: string;
   atmosphere: string;
   variant: PlanetVariant;
-  coordinates: Coordinates;
   spaceObservation: string;
+  coordinates?: Coordinates;
 };
 
 export class Planet {
@@ -34,10 +36,12 @@ export class Planet {
   private _feature: PlanetProps["feature"];
   private _atmosphere: PlanetProps["atmosphere"];
   private _coordinates: PlanetProps["coordinates"];
+  private _id: Exclude<PlanetProps["id"], undefined>;
   private _spaceObservation: PlanetProps["spaceObservation"];
   private _settlementsManager: SettlementsManager<"PLANETSIDE" | "ORBITAL">;
 
   constructor({
+    id = uuid(),
     star,
     name,
     life,
@@ -47,6 +51,7 @@ export class Planet {
     coordinates,
     spaceObservation,
   }: PlanetProps) {
+    this._id = id;
     this._name = name;
     this._star = star;
     this._life = life;
@@ -59,15 +64,11 @@ export class Planet {
   }
 
   get id() {
-    return `${this._coordinates.x}:${this._coordinates.y}`;
+    return this._id;
   }
 
   get name() {
     return this._name;
-  }
-
-  get code() {
-    return `${this.star.code}-${this._coordinates.x}-${this._coordinates.y}`;
   }
 
   get life() {
@@ -155,8 +156,12 @@ export class Planet {
       .otherwise(() => undefined);
   }
 
+  set coordinates(coordinates: undefined | Coordinates) {
+    this._coordinates = coordinates;
+  }
+
   get coordinates() {
-    return { ...this._coordinates };
+    return !this._coordinates ? undefined : { ...this._coordinates };
   }
 
   get settlements() {

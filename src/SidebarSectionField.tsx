@@ -1,4 +1,5 @@
 import { useId } from "react";
+import { Text } from "./components";
 
 type SidebarSectionFieldProps = {
   label: string;
@@ -13,11 +14,11 @@ export const SidebarSectionField = ({
 
   return (
     <div className="flex flex-col">
-      <span id={id} className="uppercase text-xs font-bold">
+      <Text id={id} className="uppercase text-xs font-bold">
         {label}
-      </span>
+      </Text>
 
-      <span aria-labelledby={id}>{value}</span>
+      <Text aria-labelledby={id}>{value}</Text>
     </div>
   );
 };

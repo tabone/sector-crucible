@@ -2,7 +2,7 @@ import { uuid } from "./utils";
 import { Star } from "./Star";
 import { Planet } from "./Planet";
 import type { Sector } from "./Sector";
-import type { SettlementVariant } from "./models";
+import type { Coordinates, SettlementVariant } from "./models";
 
 import orbitalImage from "../assets/settlements/orbital.png";
 import deepSpaceImage from "../assets/settlements/deep-space.png";
@@ -27,6 +27,7 @@ export type SettlementProps<TVariant extends SettlementVariant> = {
   firstLook: string;
   population: string;
   initialContact: string;
+  coordinates?: Coordinates;
   parent: ComputeParent<TVariant>;
 };
 
@@ -41,6 +42,7 @@ export class Settlement<
   private _authority: SettlementProps<TVariant>["authority"];
   private _firstLook: SettlementProps<TVariant>["firstLook"];
   private _population: SettlementProps<TVariant>["population"];
+  private _coordinates: SettlementProps<TVariant>["coordinates"];
   private _id: Exclude<SettlementProps<TVariant>["id"], undefined>;
   private _initialContact: SettlementProps<TVariant>["initialContact"];
 
@@ -54,6 +56,7 @@ export class Settlement<
     authority,
     firstLook,
     population,
+    coordinates,
     initialContact,
   }: SettlementProps<TVariant>) {
     this._id = id;
@@ -65,6 +68,7 @@ export class Settlement<
     this._authority = authority;
     this._firstLook = firstLook;
     this._population = population;
+    this._coordinates = coordinates;
     this._initialContact = initialContact;
   }
 
@@ -74,6 +78,18 @@ export class Settlement<
 
   get name() {
     return this._name;
+  }
+
+  set coordinates(coordinates: undefined | Coordinates) {
+    this._coordinates = coordinates;
+  }
+
+  get coordinates() {
+    return this._variant === "PLANETSIDE"
+      ? undefined
+      : !this._coordinates
+        ? undefined
+        : { ...this._coordinates };
   }
 
   get parentType() {

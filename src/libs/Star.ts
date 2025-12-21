@@ -1,5 +1,5 @@
 import { match } from "ts-pattern";
-import type { StarVariant } from "./models";
+import type { Coordinates, StarVariant } from "./models";
 import { Planet, type PlanetProps } from "./Planet";
 import type { Sector } from "./Sector";
 import { SettlementsManager } from "./SettlementsManager";
@@ -140,12 +140,25 @@ export class Star {
     return this._sector;
   }
 
+  get coordinates() {
+    return this._sector.region.universe.sectorCenter;
+  }
+
   get variant() {
     return this._variant;
   }
 
   get planets() {
     return Object.values(this._planets);
+  }
+
+  getPlanetByCoords(coords: Coordinates) {
+    return this.planets.find(
+      (planet) =>
+        planet.coordinates &&
+        planet.coordinates.x === coords.x &&
+        planet.coordinates.y === coords.y,
+    );
   }
 
   get settlements() {

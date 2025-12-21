@@ -12,9 +12,7 @@ import type { Planet } from "./Planet";
 
 export type SimulationProps = {
   seed?: number;
-  settings: {
-    regions: UniverseProps["regions"];
-  };
+  settings: UniverseProps["settings"];
 };
 
 export class Simulation {
@@ -36,8 +34,8 @@ export class Simulation {
 
     this._noise = {
       stars: makeRectangle(
-        settings.regions.width,
         settings.regions.height,
+        settings.regions.width,
         makeNoise2D(seed * 2),
         {
           frequency: 0.04,
@@ -46,8 +44,8 @@ export class Simulation {
       ),
 
       planets: makeRectangle(
-        settings.regions.width,
         settings.regions.height,
+        settings.regions.width,
         makeNoise2D(seed * 3),
         {
           frequency: 0.04,
@@ -56,8 +54,8 @@ export class Simulation {
       ),
 
       population: makeRectangle(
-        settings.regions.width,
         settings.regions.height,
+        settings.regions.width,
         makeNoise2D(seed * 4),
         {
           frequency: 0.04,
@@ -90,9 +88,7 @@ export class Simulation {
   createUniverse() {
     if (this._universe) return;
 
-    this._universe = new Universe({
-      regions: this.settings.regions,
-    });
+    this._universe = new Universe({ settings: this.settings });
 
     this._universe.regions.forEach((region) => this.populateRegion(region));
 
@@ -269,7 +265,6 @@ export class Simulation {
 
   private createPlanet(star: Star) {
     return star.createPlanet({
-      coordinates: { x: Math.random(), y: Math.random() },
       ...this.getPlanetOracles(
         PLANET_VARIANTS[this._random.int(PLANET_VARIANTS.length)],
       ),

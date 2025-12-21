@@ -1,13 +1,13 @@
-import type { Settlement as SettlementModel } from "../libs/Settlement";
-import { SidebarFields } from "../SidebarFields";
-import { SidebarItem } from "../SidebarItem";
-import { SidebarSectionField } from "../SidebarSectionField";
+import type { Settlement } from "../../libs/Settlement";
+import { SidebarFields } from "../../SidebarFields";
+import { SidebarItem } from "../../SidebarItem";
+import { SidebarSectionField } from "../../SidebarSectionField";
 
-type SettlementProps = {
-  settlement: SettlementModel;
+type SettlementDetailsProps = {
+  settlement: Settlement;
 };
 
-export const Settlement = ({ settlement }: SettlementProps) => {
+export const SettlementDetails = ({ settlement }: SettlementDetailsProps) => {
   return (
     <SidebarItem
       title={settlement.name}

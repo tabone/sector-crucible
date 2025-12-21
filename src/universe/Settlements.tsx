@@ -1,8 +1,8 @@
 import type { Sector } from "../libs/Sector";
 import { SidebarSection } from "../SidebarSection";
-import { Settlement } from "./Settlement";
 import { useMemo } from "react";
 import { SidebarNoResults } from "../SidebarNoResults";
+import { SettlementDetails } from "../components";
 
 type SettlementsProps = {
   sector: Sector;
@@ -26,7 +26,9 @@ export const Settlements = ({ sector }: SettlementsProps) => {
       {settlements.length === 0 ? (
         <SidebarNoResults message="No Settlements" />
       ) : (
-        settlements.map((settlement) => <Settlement settlement={settlement} />)
+        settlements.map((settlement) => (
+          <SettlementDetails settlement={settlement} />
+        ))
       )}
     </SidebarSection>
   );

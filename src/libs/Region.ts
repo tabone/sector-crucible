@@ -1,7 +1,7 @@
 import { match } from "ts-pattern";
 import { Sector, type SectorProps } from "./Sector";
 import type { Universe } from "./Universe";
-import type { RegionVariant } from "./models";
+import type { RegionCode, RegionVariant } from "./models";
 
 export type RegionProps = {
   id: string;
@@ -41,7 +41,7 @@ export class Region {
   }
 
   get code() {
-    return match(this._variant)
+    return match<RegionVariant, RegionCode>(this._variant)
       .with("EXPANSE", () => "E")
       .with("OUTLANDS", () => "O")
       .with("TERMINUS", () => "T")

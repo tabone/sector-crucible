@@ -1,4 +1,5 @@
 import type { PropsWithChildren } from "react";
+import { Text } from "./components";
 
 type SidebarItemProps = PropsWithChildren<{
   title: string;
@@ -9,8 +10,8 @@ type SidebarItemProps = PropsWithChildren<{
 export const SidebarItem = ({
   title,
   image,
-  description,
   children,
+  description,
 }: SidebarItemProps) => (
   <article className="flex flex-col border border-teal-900">
     <header className="flex gap-2 p-2">
@@ -23,8 +24,8 @@ export const SidebarItem = ({
       </figure>
 
       <div className="flex flex-col gap-0 flex-1">
-        <strong>{title}</strong>
-        <span>{description}</span>
+        <Text className="font-bold uppercase">{title}</Text>
+        <Text>{description}</Text>
       </div>
     </header>
 

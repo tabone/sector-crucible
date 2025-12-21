@@ -1,13 +1,13 @@
-import type { Planet as PlanetModel } from "../libs/Planet";
-import { SidebarFields } from "../SidebarFields";
-import { SidebarItem } from "../SidebarItem";
-import { SidebarSectionField } from "../SidebarSectionField";
+import type { Planet } from "../../libs/Planet";
+import { SidebarFields } from "../../SidebarFields";
+import { SidebarItem } from "../../SidebarItem";
+import { SidebarSectionField } from "../../SidebarSectionField";
 
-type PlanetProps = {
-  planet: PlanetModel;
+type PlanetDetailsProps = {
+  planet: Planet;
 };
 
-export const Planet = ({ planet }: PlanetProps) => {
+export const PlanetDetails = ({ planet }: PlanetDetailsProps) => {
   return (
     <SidebarItem
       image={planet.image}
